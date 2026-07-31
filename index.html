@@ -9,7 +9,9 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-/* Palet Warna Neo-Brutalism */
+*:focus-visible { outline: 4px dashed var(--red); outline-offset: 4px; }
+.fg input:focus-visible, .fg textarea:focus-visible { outline: none; }
+
 :root{
   --bg:#f4f4f0;
   --txt:#000000;
@@ -18,25 +20,21 @@
   --gold:#FFD500;
   --blue:#0055FF;
   --green:#00FF66;
-  --grid: rgba(0,0,0,0.06);
-  --bw:3px; /* Ketebalan Border */
+  --bw:3px;
 }
 
 html{scroll-behavior:smooth}
 
-/* Latar Belakang Blueprint Grid */
 body{
-  background-color:var(--bg);
-  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 30px 30px;
-  color:var(--txt);
-  font-family:'Inter',sans-serif;
-  cursor:none;
-  overflow-x:hidden;
+  background-color: var(--bg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--txt);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Tipografi Heading Brutal */
-h1, h2, h3, .nlogo, .nlinks a, .lbtn, .apill, .hsub, .bp, .bs, .wtag, .mlbl, .slbl, .sbn, .tglbl, .tldate, .tlco, .ciss, .fttl, .fbtn, .chtitle, .ffix, .botwname, .botwtitle, .wnum, .wtitle, .os-title, #btt, .live-badge {
+h1, h2, h3, .nlogo, .nlinks a, .lbtn, .apill, .hsub, .bp, .bs, .wtag, .mlbl, .slbl, .sbn, .tglbl, .tldate, .tlco, .ciss, .fttl, .fbtn, .chtitle, .wnum, .wtitle, .os-title, #btt, .live-badge {
   font-family:'Space Grotesk',sans-serif;
   text-transform: uppercase;
 }
@@ -44,20 +42,42 @@ h1, h2, h3, .nlogo, .nlinks a, .lbtn, .apill, .hsub, .bp, .bs, .wtag, .mlbl, .sl
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-thumb{background:var(--border); border-radius:0px;}
 
-/* Custom Cursor Brutalist (Kotak) */
 #cd{position:fixed;width:12px;height:12px;background:var(--border);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
 #cr{position:fixed;width:36px;height:36px;border:var(--bw) solid var(--border);background:var(--gold);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s,top .1s}
 
-/* Komponen Kartu Neo-Brutalist Umum */
+@media (pointer: coarse) {
+  #cd, #cr { display: none !important; }
+}
+@media (pointer: fine) {
+  body, a, button, input, textarea, .wrow, .mitem, .atag, .stat-box, .live-badge, .filter-btn { cursor: none !important; }
+}
+
+/* SPLASH SCREEN */
+#splash {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+  background: var(--gold); z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: var(--bw) solid var(--border);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.s-content { text-align: center; display: flex; flex-direction: column; gap: 12px; }
+.s-text {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 4vw, 32px); font-weight: 700;
+  letter-spacing: 0.2em; background: #fff; border: var(--bw) solid var(--border);
+  padding: 8px 16px; box-shadow: 4px 4px 0px var(--border);
+}
+#s-counter {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(80px, 15vw, 150px); font-weight: 700;
+  line-height: 1; color: #fff; -webkit-text-stroke: 3px var(--border); text-shadow: 8px 8px 0px var(--border);
+}
+.splash-hide { transform: translateY(-100%); }
+
 .brutal-box {
-  background: #fff;
-  border: var(--bw) solid var(--border);
-  box-shadow: 6px 6px 0px var(--border);
+  background: #fff; border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .brutal-box:hover {
-  transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0px var(--border);
+  transform: translate(3px, 3px); box-shadow: 3px 3px 0px var(--border);
 }
 
 /* NAV */
@@ -66,17 +86,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nlinks{display:flex;align-items:center;gap:28px}
 .nlinks a{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--txt);text-decoration:none;transition:.2s; background:var(--bg); padding:2px 6px;}
 .nlinks a:hover{color:var(--red); text-decoration:underline; text-decoration-thickness:3px;}
-.lbtn{font-size:12px;font-weight:700;background:var(--blue);border:var(--bw) solid var(--border);color:#fff;padding:8px 16px;cursor:none;transition:.2s;letter-spacing:.05em; box-shadow: 3px 3px 0px var(--border);}
+.lbtn{font-size:12px;font-weight:700;background:var(--blue);border:var(--bw) solid var(--border);color:#fff;padding:8px 16px;transition:.2s;letter-spacing:.05em; box-shadow: 3px 3px 0px var(--border);}
 .lbtn:hover{transform:translate(2px,2px); box-shadow: 1px 1px 0px var(--border);}
 
 /* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:55fr 45fr;padding-top:80px;position:relative;overflow:hidden; border-bottom:var(--bw) solid var(--border);}
-.hleft{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1; border-right:var(--bw) solid var(--border); background:rgba(244, 244, 240, 0.9);}
+.hleft{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1; border-right:var(--bw) solid var(--border); background:rgba(244, 244, 240, 0.95);}
 .apill{display:inline-flex;align-items:center;gap:8px;border:var(--bw) solid var(--border);background:#fff;padding:7px 18px;margin-bottom:26px;font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--txt);width:fit-content; box-shadow: 4px 4px 0px var(--border);}
 .adot{width:10px;height:10px;background:var(--green);border:2px solid var(--border);animation:bl 1.5s steps(2, end) infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
 
-/* HNAME & TYPOGRAPHY EFFECTS (LURUS & RAPI) */
 .hname{font-size:clamp(46px,7vw,100px);line-height:.95;margin-bottom:24px; font-weight:700; letter-spacing:-2px;}
 .nl, .nb { display:block; transition: all 0.15s ease; }
 .nl:hover { transform: translate(-3px, -3px); text-shadow: 5px 5px 0px var(--blue); }
@@ -84,35 +103,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nb::after { content: '_'; color: var(--red); animation: blink 1s step-end infinite; margin-left: 8px; }
 @keyframes blink { 50% { opacity: 0; } }
 
-.ni { display:block; margin-left: 20px; color: transparent; -webkit-text-stroke: 2px var(--red); transition: all 0.15s ease; cursor: none; }
+.ni { display:block; margin-left: 20px; color: transparent; -webkit-text-stroke: 2px var(--red); transition: all 0.15s ease;}
 .ni:hover { color: var(--red); -webkit-text-stroke: 2px var(--border); transform: translate(-4px, -4px); text-shadow: 6px 6px 0px var(--border); }
 
-/* BADGE KUNING */
 .hsub{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:20px; background:var(--gold); padding:5px 10px; width:fit-content; border:var(--bw) solid var(--border); transition: all 0.15s ease;}
 .hsub:hover { transform: rotate(-3deg) scale(1.05); background: var(--blue); color: #fff; }
 
-/* BIO LURUS & KOKOH */
 .hbio {
   font-size: 16px; line-height: 1.6; color: var(--txt); width: 100%; max-width: 520px; margin-bottom: 34px; font-weight: 500;
   background: #fff; padding: 20px 24px; border: var(--bw) solid var(--border);
   box-shadow: 6px 6px 0px var(--border);
 }
 .ctas{display:flex;gap:16px;margin-bottom:42px;flex-wrap:wrap}
-.bp, .bs {background:var(--red);color:#fff;padding:16px 32px;font-size:13px;font-weight:700;letter-spacing:.1em;text-decoration:none;cursor:none;border:var(--bw) solid var(--border); box-shadow: 5px 5px 0px var(--border); transition: transform 0.1s, box-shadow 0.1s;}
+.bp, .bs {background:var(--red);color:#fff;padding:16px 32px;font-size:13px;font-weight:700;letter-spacing:.1em;text-decoration:none;border:var(--bw) solid var(--border); box-shadow: 5px 5px 0px var(--border); transition: transform 0.1s, box-shadow 0.1s;}
 .bs {background:#fff; color:var(--txt);}
 .bp:hover, .bs:hover {transform:translate(3px,3px); box-shadow: 2px 2px 0px var(--border);}
 
-/* STATS & LIVE BADGE CONTAINER */
-.hstats-wrapper {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; max-width: 520px;
-}
+.hstats-wrapper { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; max-width: 520px; }
 .hstats { display: flex; gap: 12px; }
-.stat-box { background: #fff; border: var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border); padding: 10px 16px; transition: 0.15s; cursor: none; text-align: center; }
+.stat-box { background: #fff; border: var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border); padding: 10px 16px; transition: 0.15s; text-align: center; }
 .stat-box:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0px var(--red); background: var(--gold); }
 .stn { font-size: 30px; font-weight: 700; line-height: 1; -webkit-text-stroke: 1px var(--border); }
 .stl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; margin-top: 4px; border-top: 2px solid var(--border); padding-top: 2px; }
 
-/* LIVE STATUS BADGE DENGAN ANIMASI KEDIP */
 .live-badge {
   background: var(--gold); border: var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border);
   padding: 14px 16px; font-size: 11px; font-weight: 700; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; flex-grow: 1;
@@ -121,48 +134,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   font-size: 9px; letter-spacing: 0.05em; background: #fff; border: 2px solid var(--border); padding: 1px 6px; 
   animation: badgeBlink 1.2s steps(2, end) infinite;
 }
-@keyframes badgeBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-/* HERO PHOTO */
+@keyframes badgeBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
 .hright{position:relative;display:flex;align-items:center;justify-content:center;padding:40px; background:var(--blue);}
 .pwrap{position:relative;width:100%;height:82vh;max-height:660px; border:var(--bw) solid var(--border); box-shadow: 12px 12px 0px var(--border); background:#fff; overflow:hidden;}
 .pimg{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 
-/* Marquee Effect */
+/* Marquee / Running Text dengan Pause & Ganti Warna saat Hover */
 .marquee-container {
-  width: 100%; border-bottom: var(--bw) solid var(--border); background: var(--gold); padding: 12px 0; overflow: hidden; white-space: nowrap; display:flex; align-items:center;
+  width: 100%; border-bottom: var(--bw) solid var(--border); background: var(--gold); padding: 12px 0; overflow: hidden; white-space: nowrap; display:flex; align-items:center; cursor: pointer; transition: background 0.3s ease;
 }
 .marquee-content {
   display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--txt);
   animation: marquee 15s linear infinite;
+  will-change: transform;
+  transition: color 0.3s ease;
+}
+.marquee-container:hover {
+  background: var(--blue);
+}
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+  color: #fff;
 }
 .marquee-content span { padding-right: 40px; }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* WORK */
-#work{padding:80px 48px;position:relative; border-bottom:var(--bw) solid var(--border);}
-.shead{display:flex;align-items:flex-end;gap:18px;margin-bottom:48px; background:var(--bg); padding:10px;}
-.stitle{font-size:clamp(32px,5vw,72px);font-weight:700; letter-spacing:-1px; text-shadow: 4px 4px 0px var(--gold); background:var(--bg);}
+#work{padding:80px 48px;position:relative; border-bottom:var(--bw) solid var(--border); background: transparent;}
+.shead{display:flex;align-items:flex-end;gap:18px;margin-bottom:32px; background: transparent; padding:0;}
+.stitle{font-size:clamp(32px,5vw,72px);font-weight:700; letter-spacing:-1px; text-shadow: 4px 4px 0px var(--gold); background: transparent;}
 .ssub{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--txt); background:#fff; border:2px solid var(--border); padding:4px 8px;}
 
-/* Clickable Rows */
+/* Filter Bar Proyek */
+.filter-bar { display: flex; gap: 12px; margin-bottom: 36px; flex-wrap: wrap; }
+.filter-btn { background: var(--bg); border: var(--bw) solid var(--border); padding: 8px 18px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; box-shadow: 3px 3px 0px var(--border); transition: 0.15s; }
+.filter-btn:hover { background: var(--gold); transform: translate(-2px, -2px); box-shadow: 5px 5px 0px var(--border); }
+.filter-btn.active { background: var(--txt); color: #fff; box-shadow: 2px 2px 0px var(--gold); transform: translate(2px, 2px); }
+
+/* Clickable Rows & Clean Single Arrow Animation */
 .wrows{max-width:1000px;margin:0 auto 64px;}
 .wrow{
   display:grid;grid-template-columns:80px 1fr 50px;gap:24px;align-items:center;
   background:#fff; border:var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border);
-  padding:24px; margin-bottom: 24px; transition:all .15s ease; cursor:none;
+  padding:24px; margin-bottom: 24px; transition:all .15s ease;
 }
 .wrow:hover{background:var(--gold); transform:translate(3px,3px); box-shadow: 3px 3px 0px var(--border);}
 .wnum{font-size:48px;font-weight:700;color:var(--txt);line-height:1;}
 .wtag{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:6px; background:#fff; border:2px solid var(--border); width:fit-content; padding:2px 6px;}
 .wtitle{font-size:24px;font-weight:700;margin-bottom:6px;}
 .wsub{font-size:14px;font-weight:500;color:var(--txt);}
-.warr{text-decoration:none;color:var(--txt);font-size:24px;font-weight:700;transition:.2s; background:#fff; border:2px solid var(--border); width:40px; height:40px; display:flex; align-items:center; justify-content:center;}
-.wrow:hover .warr{background:var(--red); color:#fff;}
+.warr{text-decoration:none;color:var(--txt);font-size:18px;font-weight:700;transition:all 0.2s ease; background:#fff; border:2px solid var(--border); width:40px; height:40px; display:flex; align-items:center; justify-content:center;}
+.wrow:hover .warr{background:var(--red); color:#fff; transform: translateY(-4px);}
+.wrow:hover .warr span { transform: rotate(-90deg); }
+.warr span { display: inline-block; transition: transform 0.2s ease; }
 
-/* GRID 2x2 WITH OS WINDOW & GRAYSCALE HOVER - ANTI CACLOK FIX */
+/* MOCKUP GRID */
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1000px;margin:0 auto; align-items: start;}
 .mitem{border:var(--bw) solid var(--border); box-shadow: 8px 8px 0px var(--border); background:#fff; display:flex; flex-direction:column; transition: transform 0.15s, box-shadow 0.15s;}
 .mitem:hover{transform: translate(4px,4px); box-shadow: 4px 4px 0px var(--border);}
@@ -180,14 +207,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mitem:hover .mimg-wrap img { filter: grayscale(0%) contrast(100%); transform: scale(1.05); }
 .mlbl{padding:16px;font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--txt); background:#fff;}
 
-/* ABOUT */
+/* ABOUT - Diperbaiki total agar blok teks tidak tumpang tindih */
 #about{padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px; border-bottom:var(--bw) solid var(--border); background:#fff;}
-.aq{font-size:32px;font-weight:700;line-height:1.2;margin-bottom:26px; letter-spacing:-1px; background:var(--bg); padding:10px;}
-.aq span{background:var(--red); color:#fff; padding:0 5px; border:2px solid var(--border);}
-.ab{font-size:16px;line-height:1.6;font-weight:500;color:var(--txt);margin-bottom:40px; background:#fff; padding:16px; border:var(--bw) solid var(--border); box-shadow:4px 4px 0px var(--border);}
-.slbl{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:24px; border-bottom:3px solid var(--border); padding-bottom:8px; width:fit-content; background:var(--bg);}
+.aq{font-size:28px;font-weight:700;line-height:1.4;margin-bottom:24px; letter-spacing:-0.5px; background:var(--bg); padding:16px; border:var(--bw) solid var(--border); box-shadow:4px 4px 0px var(--border);}
+.aq span{background:var(--red); color:#fff; padding:2px 8px; border:2px solid var(--border); display:inline-block; margin:4px 2px;}
+.ab{font-size:16px;line-height:1.6;font-weight:500;color:var(--txt);margin-bottom:32px; background:#fff; padding:20px; border:var(--bw) solid var(--border); box-shadow:4px 4px 0px var(--border);}
+.slbl{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:20px; border-bottom:3px solid var(--border); padding-bottom:6px; width:fit-content; background:var(--bg);}
 
-/* SKILL BARS BRUTAL */
+/* SKILL BARS */
 .sbar{margin-bottom:20px; background:#fff; padding:8px; border:2px solid var(--border);}
 .sbh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .sbn{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
@@ -208,7 +235,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .tag{font-family:'Space Grotesk',sans-serif; font-size:11px;font-weight:700;border:2px solid var(--border);background:var(--gold);padding:6px 12px; text-transform:uppercase; box-shadow: 2px 2px 0px var(--border); transition:0.1s;}
 .tag:hover {transform:rotate(-3deg) scale(1.1); background:var(--blue); color:#fff;}
 
-/* ARSENAL & TECH STACK STYLES */
+/* ARSENAL & TECH STACK LENGKAP */
 .arsenal-box { background: #fff; border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border); padding: 24px; margin-top: 32px; }
 .atags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .atag { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; border: 2px solid var(--border); background: var(--bg); padding: 6px 12px; text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s, background 0.1s; }
@@ -225,7 +252,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .tlitem::before{content:'';position:absolute;left:-11px;top:0px;width:16px;height:16px;background:var(--red);border:3px solid var(--border);}
 .tldate{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--txt);background:var(--gold);width:fit-content;padding:2px 6px;border:2px solid var(--border);margin-bottom:10px}
 .tlrole{font-size:20px;font-weight:700;margin-bottom:4px; background:#fff; display:inline-block;}
-.tlco{font-size:14px;font-weight:700;color:var(--blue);margin-bottom:6px; background:#fff; display:inline-block; padding:0 4px;}
+.tlco{font-size:14px;font-weight:700;color:var(--blue);margin-bottom:2px; background:#fff; display:inline-block; padding:0 4px;}
+.tlloc{font-size:11px;font-weight:700;color:var(--txt);background:var(--bg);border:1px solid var(--border);width:fit-content;padding:1px 6px;margin-bottom:6px;letter-spacing:0.05em;}
 .tlhi{font-size:13px;font-weight:500; font-family:'Inter',sans-serif; background:var(--bg); padding:4px 8px; border:1px solid var(--border); width:fit-content; line-height: 1.5;}
 
 /* CERTS */
@@ -250,16 +278,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .chline em{font-style:normal;color:var(--red); text-decoration:underline; text-decoration-thickness:6px;}
 .csub{font-size:16px;font-weight:500;color:var(--txt);margin-bottom:32px;line-height:1.6; background:#fff; padding:10px; border:2px dashed var(--border);}
 
-/* FORM BRUTAL */
 .fbox{background:var(--gold); border:var(--bw) solid var(--border); box-shadow: 8px 8px 0px var(--border); padding:32px;}
 .fttl{font-size:18px;font-weight:700;letter-spacing:.05em;margin-bottom:24px; border-bottom:3px solid var(--border); padding-bottom:8px;}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .fg{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .fg label{font-size:12px;font-weight:700;letter-spacing:.05em;}
-.fg input,.fg textarea{background:#fff;border:var(--bw) solid var(--border);color:var(--txt);font-family:'Inter',sans-serif;font-size:14px;padding:12px;outline:none; box-shadow: 3px 3px 0px var(--border); transition:.1s; cursor:none}
+.fg input,.fg textarea{background:#fff;border:var(--bw) solid var(--border);color:var(--txt);font-family:'Inter',sans-serif;font-size:14px;padding:12px;box-shadow: 3px 3px 0px var(--border); transition:.1s;}
 .fg input:focus,.fg textarea:focus{transform:translate(2px,2px); box-shadow: 1px 1px 0px var(--border); background:var(--bg);}
 .fg textarea{resize:none;min-height:120px}
-.fbtn{background:var(--txt);color:#fff;border:var(--bw) solid var(--border);padding:16px 24px;font-size:14px;font-weight:700;letter-spacing:.1em;cursor:none;transition:.1s;width:100%;margin-top:8px; box-shadow: 4px 4px 0px var(--red);}
+.fbtn{background:var(--txt);color:#fff;border:var(--bw) solid var(--border);padding:16px 24px;font-size:14px;font-weight:700;letter-spacing:.1em;transition:.1s;width:100%;margin-top:8px; box-shadow: 4px 4px 0px var(--red);}
 .fbtn:hover{transform:translate(3px,3px); box-shadow: 1px 1px 0px var(--red);}
 
 .chcard{background:#fff;border:var(--bw) solid var(--border); box-shadow: 5px 5px 0px var(--border); padding:20px;margin-bottom:16px;display:flex;align-items:center;gap:20px;transition:.15s;text-decoration:none;color:var(--txt)}
@@ -269,25 +296,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .chdesc{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;margin-bottom:4px}
 .chval{font-size:13px;font-weight:700;color:var(--blue); border-top:2px solid var(--border); padding-top:4px;}
 
-/* FOOTER & LIVE CLOCK */
+/* FOOTER */
 footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var(--txt);color:#fff;display:flex;justify-content:space-between;align-items:center; font-family:'Space Grotesk',sans-serif; font-weight:700; text-transform:uppercase;}
 .live-sys {background:var(--blue); border:2px solid #fff; padding:4px 8px; font-size:11px;}
 
-/* BACK TO TOP BUTTON */
 #btt {
   position: fixed; bottom: 30px; right: 30px; z-index: 1000;
   background: var(--txt); color: #fff;
   border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--gold);
   padding: 14px 20px; font-size: 14px;
-  display: none; cursor: none; transition: 0.1s;
+  display: none; transition: 0.1s;
 }
 #btt:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0px var(--gold); background: var(--blue); }
 
-/* REVEAL KASAR (Snappy) */
-.rv{opacity:0;transform:translateY(30px) scale(0.98);transition:opacity 0.4s steps(5, end), transform 0.4s steps(5, end);}
+.rv{opacity:0;transform:translateY(30px) scale(0.98);transition:opacity 0.4s steps(5, end), transform 0.4s steps(5, end); will-change: opacity, transform;}
 .rv.on{opacity:1;transform:translateY(0) scale(1);}
 
-/* MOBILE */
 @media(max-width:768px){
   nav { padding: 16px 15px; }
   .nlogo { font-size: 14px; padding: 4px 6px; }
@@ -318,6 +342,14 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
 </style>
 </head>
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="s-content">
+    <div class="s-text" data-en="SYSTEM BOOT" data-id="MEMULAI SISTEM">SYSTEM BOOT</div>
+    <div id="s-counter">0%</div>
+  </div>
+</div>
+
 <div id="cd"></div><div id="cr"></div>
 
 <nav>
@@ -347,7 +379,6 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <a href="https://drive.google.com/drive/folders/1UdDvC6CPPHDwFdqBIIVD07SVYxRn1R6h?usp=drive_link" target="_blank" class="bs" data-en="Full Portfolio" data-id="Portofolio Lengkap">Full Portfolio</a>
     </div>
     
-    <!-- STATS DAN LIVE BADGE DIBAWAHNYA DIBUAT LURUS DAN SEJAJAR -->
     <div class="hstats-wrapper">
       <div class="hstats">
         <div class="stat-box">
@@ -377,7 +408,7 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
   </div>
 </section>
 
-<!-- Marquee Section -->
+<!-- Marquee Section (Pause & Ganti Warna saat Hover) -->
 <div class="marquee-container">
   <div class="marquee-content">
     <span>DATA ANALYTICS • VISUAL BRANDING • STRATEGIC COMMUNICATION • </span>
@@ -391,46 +422,54 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
     <h2 class="stitle" data-en="SELECTED WORK" data-id="KARYA PILIHAN">SELECTED WORK</h2>
     <span class="ssub" data-en="2024 — Present" data-id="2024 — Sekarang">2024 — Present</span>
   </div>
-<div class="wrows">
-    <a href="https://drive.google.com/file/d/13RPmI9cJZO0rqXXXdbEy-B27Pms9iFNw/view?usp=drive_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+
+  <!-- Filter Bar Proyek -->
+  <div class="filter-bar rv">
+    <button class="filter-btn active" data-filter="all" data-en="ALL PROJECTS" data-id="SEMUA KARYA">ALL PROJECTS</button>
+    <button class="filter-btn" data-filter="design" data-en="DESIGN &amp; PRINT" data-id="DESAIN &amp; CETAK">DESIGN &amp; PRINT</button>
+    <button class="filter-btn" data-filter="data" data-en="DATA &amp; DASHBOARD" data-id="DATA &amp; DASHBOARD">DATA &amp; DASHBOARD</button>
+    <button class="filter-btn" data-filter="ops" data-en="SYSTEM &amp; ADMIN" data-id="SISTEM &amp; ADMIN">SYSTEM &amp; ADMIN</button>
+  </div>
+
+  <div class="wrows">
+    <a href="https://drive.google.com/file/d/13RPmI9cJZO0rqXXXdbEy-B27Pms9iFNw/view?usp=drive_link" target="_blank" class="brutal-box wrow rv" data-category="design" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">01</div>
       <div><div class="wtag">Print Design</div><div class="wtitle">PT. Rajawali Trans Multimas</div><div class="wsub" data-en="Company Profile · Security &amp; Labour Supply" data-id="Profil Perusahaan · Keamanan &amp; Tenaga Kerja">Company Profile · Security &amp; Labour Supply</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://drive.google.com/file/d/15frPD74pbsEw0hD4h5QRRXDRoHaBY8Hs/view?usp=drive_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://drive.google.com/file/d/15frPD74pbsEw0hD4h5QRRXDRoHaBY8Hs/view?usp=drive_link" target="_blank" class="brutal-box wrow rv" data-category="design" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">02</div>
       <div><div class="wtag">Editorial Design</div><div class="wtitle">PT. Rafflesia Tirta Multimas</div><div class="wsub" data-en="Company Profile · Cleaning Service &amp; Landscape" data-id="Profil Perusahaan · Cleaning Service &amp; Lansekap">Company Profile · Cleaning Service &amp; Landscape</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://docs.google.com/spreadsheets/d/1v3z6l2lTFno_d6xcysCSW9hqceckzlXC/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://docs.google.com/spreadsheets/d/1v3z6l2lTFno_d6xcysCSW9hqceckzlXC/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" data-category="data" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">03</div>
       <div><div class="wtag">Data Visualization</div><div class="wtitle" data-en="Self-Employed Dashboard" data-id="Dashboard Wiraswasta">Self-Employed Dashboard</div><div class="wsub" data-en="Business Analytics · Excel / Google Sheets" data-id="Analitik Bisnis · Excel / Google Sheets">Business Analytics · Excel / Google Sheets</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://docs.google.com/spreadsheets/d/1sKebO_c8-ZXUN6zodI5qODM2qh0LgWGN/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://docs.google.com/spreadsheets/d/1sKebO_c8-ZXUN6zodI5qODM2qh0LgWGN/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" data-category="ops" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">04</div>
       <div><div class="wtag">Spreadsheet</div><div class="wtitle">Inventori Toko Sembako</div><div class="wsub" data-en="Inventory Management System" data-id="Sistem Manajemen Inventori">Inventory Management System</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://docs.google.com/spreadsheets/d/1_u12HT8W_ezaSCR5xYZSlCSfz3wlkK02oDb2H83z3Y8/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://docs.google.com/spreadsheets/d/1_u12HT8W_ezaSCR5xYZSlCSfz3wlkK02oDb2H83z3Y8/edit?usp=drive_link" target="_blank" class="brutal-box wrow rv" data-category="data ops" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">05</div>
       <div><div class="wtag">Analytics</div><div class="wtitle" data-en="Job Application Tracker" data-id="Pelacak Lamaran Kerja">Job Application Tracker</div><div class="wsub" data-en="HR Analytics · Workflow Automation" data-id="Analitik HR · Otomasi Alur Kerja">HR Analytics · Workflow Automation</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://docs.google.com/spreadsheets/d/1AsJDMQdmAsrgfyvpx0YISoFYeTORuWxk/edit?gid=1500220016#gid=1500220016" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://docs.google.com/spreadsheets/d/1AsJDMQdmAsrgfyvpx0YISoFYeTORuWxk/edit?gid=1500220016#gid=1500220016" target="_blank" class="brutal-box wrow rv" data-category="data ops" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">06</div>
       <div><div class="wtag">Data &amp; Automation</div><div class="wtitle" data-en="SKD Command Center" data-id="SKD Command Center">SKD Command Center</div><div class="wsub" data-en="Performance Analytics · Spreadsheet tracking &amp; 24 syllabus mapping" data-id="Analitik Performa · Pelacakan spreadsheet &amp; pemetaan 24 silabus">Performance Analytics · Spreadsheet tracking &amp; 24 syllabus mapping</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
-    <a href="https://app.notion.com/p/29666966345d81329df7cc1da26d6964?v=29666966345d81cea3a4000c57cb8cbb&source=copy_link" target="_blank" class="brutal-box wrow rv" style="text-decoration: none; color: inherit; display: grid;">
+    <a href="https://app.notion.com/p/29666966345d81329df7cc1da26d6964?v=29666966345d81cea3a4000c57cb8cbb&source=copy_link" target="_blank" class="brutal-box wrow rv" data-category="ops" style="text-decoration: none; color: inherit; display: grid;">
       <div class="wnum">07</div>
       <div><div class="wtag">Database Management</div><div class="wtitle" data-en="PKM System" data-id="Sistem PKM">PKM System</div><div class="wsub" data-en="Productivity System · Notion library tracking database" data-id="Sistem Produktivitas · Database pelacakan perpustakaan Notion">Productivity System · Notion library tracking database</div></div>
-      <div class="warr">→</div>
+      <div class="warr"><span>→</span></div>
     </a>
   </div>
 
   <div class="mgrid rv">
-    <!-- Mockup 1 -->
     <div class="mitem">
       <div class="os-bar">
         <div class="os-dots"><span class="os-dot r"></span><span class="os-dot y"></span><span class="os-dot g"></span></div>
@@ -439,7 +478,6 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="mimg-wrap"><img src="assets/img/mockup-rajawali.png" alt="PT. Rajawali Trans Multimas"></div>
       <div class="mlbl">PT. Rajawali Trans Multimas — Print Design</div>
     </div>
-    <!-- Mockup 2 -->
     <div class="mitem">
       <div class="os-bar">
         <div class="os-dots"><span class="os-dot r"></span><span class="os-dot y"></span><span class="os-dot g"></span></div>
@@ -448,7 +486,6 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="mimg-wrap"><img src="assets/img/mockup-rafflesia.png" alt="PT. Rafflesia Tirta Multimas"></div>
       <div class="mlbl">PT. Rafflesia Tirta Multimas — Editorial Design</div>
     </div>
-    <!-- Mockup 3 -->
     <div class="mitem">
       <div class="os-bar">
         <div class="os-dots"><span class="os-dot r"></span><span class="os-dot y"></span><span class="os-dot g"></span></div>
@@ -457,7 +494,6 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="mimg-wrap"><img src="assets/img/mockup-skd.png" alt="SKD Command Center Dashboard"></div>
       <div class="mlbl">SKD Command Center — Analytics &amp; Automation</div>
     </div>
-    <!-- Mockup 4 -->
     <div class="mitem">
       <div class="os-bar">
         <div class="os-dots"><span class="os-dot r"></span><span class="os-dot y"></span><span class="os-dot g"></span></div>
@@ -486,14 +522,13 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
     </div>
     <br>
     
-    <!-- COMPETENCIES & SOFT SKILLS -->
     <div class="slbl">COMPETENCIES</div>
     <div class="tgrp"><div class="tglbl">Design</div><div class="tags"><span class="tag">Graphic Design</span><span class="tag">Visual Branding</span><span class="tag">Thumbnail Design</span></div></div>
     <div class="tgrp"><div class="tglbl">Operations &amp; Admin</div><div class="tags"><span class="tag">Database Mgt.</span><span class="tag">Workflow Automation</span><span class="tag">System Administration</span></div></div>
     <div class="tgrp"><div class="tglbl">Data &amp; Analytics</div><div class="tags"><span class="tag">Data Visualization</span><span class="tag">Excel</span><span class="tag">Business Analytics</span></div></div>
     <div class="tgrp"><div class="tglbl">Soft Skills</div><div class="tags"><span class="tag">Strategic Comm.</span><span class="tag">Adaptive Leadership</span><span class="tag">Project Management</span></div></div>
 
-    <!-- TECH STACK & ARSENAL BOX -->
+    <!-- TECH STACK & ARSENAL LENGKAP -->
     <div class="arsenal-box rv">
       <div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; border-bottom: 3px solid var(--border); padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
         <span data-en="TECH STACK & ARSENAL" data-id="ALAT TEMPUR & TEKNOLOGI">TECH STACK & ARSENAL</span>
@@ -505,11 +540,11 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
         <span class="atag">CapCut</span>
         <span class="atag">Adobe Illustrator</span>
         <span class="atag">Affinity Designer</span>
-        <span class="atag">MS Word & Excel</span>
+        <span class="atag">MS Word &amp; Excel</span>
         <span class="atag">Google Workspace</span>
         <span class="atag">Looker Studio</span>
         <span class="atag">WordPress</span>
-        <span class="atag">GitHub & Vercel</span>
+        <span class="atag">GitHub &amp; Vercel</span>
       </div>
 
       <div style="border-top: 2px dashed var(--border); padding-top: 16px;">
@@ -533,31 +568,41 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
     
     <div class="tlitem">
       <div class="tldate" data-en="Jun 2026 — Present" data-id="Juni 2026 — Sekarang">Jun 2026 — Present</div>
-      <div class="tlrole" data-en="Economic Census Partner" data-id="Mitra Sensus Ekonomi 2026">Economic Census Partner</div><div class="tlco">Badan Pusat Statistik (BPS)</div><br>
+      <div class="tlrole" data-en="Economic Census Partner" data-id="Mitra Sensus Ekonomi 2026">Economic Census Partner</div>
+      <div class="tlco">Badan Pusat Statistik (BPS)</div>
+      <div class="tlloc">LOC: Cianjur, Indonesia</div>
       <div class="tlhi" data-en="Field verification &amp; operational reporting (44% target reached)" data-id="Verifikasi lapangan &amp; pelaporan operasional (Target 44% tercapai)">Field verification &amp; operational reporting (44% target reached)</div>
     </div>
     
     <div class="tlitem">
       <div class="tldate" data-en="Dec 2025 — Feb 2026" data-id="Desember 2025 — Februari 2026">Dec 2025 — Feb 2026</div>
-      <div class="tlrole" data-en="Content &amp; Operations Lead" data-id="Pimpinan Konten &amp; Operasional">Content &amp; Operations Lead</div><div class="tlco">RS3 Workshop</div><br>
+      <div class="tlrole" data-en="Content &amp; Operations Lead" data-id="Pimpinan Konten &amp; Operasional">Content &amp; Operations Lead</div>
+      <div class="tlco">Ratu Mimis</div>
+      <div class="tlloc">LOC: Purwokerto, Indonesia</div>
       <div class="tlhi" data-en="1,017,208 YouTube views · Developed WhatsApp automation & Looker Studio dashboard" data-id="1.017.208 views YouTube · Mengembangkan otomasi WhatsApp & dashboard analitik Looker Studio">1,017,208 YouTube views · Developed WhatsApp automation & Looker Studio dashboard</div>
     </div>
     
     <div class="tlitem">
       <div class="tldate" data-en="Nov 2024 — Present" data-id="November 2024 — Sekarang">Nov 2024 — Present</div>
-      <div class="tlrole" data-en="Freelance Writer &amp; Editor" data-id="Penyedia Jasa Penulisan &amp; Penyuntingan">Freelance Writer &amp; Editor</div><div class="tlco" data-en="Self-Employed" data-id="Freelance">Self-Employed</div><br>
+      <div class="tlrole" data-en="Freelance Writer &amp; Editor" data-id="Penyedia Jasa Penulisan &amp; Penyuntingan">Freelance Writer &amp; Editor</div>
+      <div class="tlco" data-en="Self-Employed" data-id="Freelance">Self-Employed</div>
+      <div class="tlloc">LOC: Remote / Cianjur</div>
       <div class="tlhi" data-en="Data-driven formal documents &amp; content research" data-id="Penyusunan dokumen formal berbasis data &amp; riset konten">Data-driven formal documents &amp; content research</div>
     </div>
     
     <div class="tlitem">
       <div class="tldate" data-en="May 2021 — Sep 2025" data-id="Mei 2021 — September 2025">May 2021 — Sep 2025</div>
-      <div class="tlrole" data-en="Graphic Designer" data-id="Desainer Grafis">Graphic Designer</div><div class="tlco" data-en="Self-Employed" data-id="Freelance">Self-Employed</div><br>
+      <div class="tlrole" data-en="Graphic Designer" data-id="Desainer Grafis">Graphic Designer</div>
+      <div class="tlco" data-en="Self-Employed" data-id="Freelance">Self-Employed</div>
+      <div class="tlloc">LOC: Cianjur, Indonesia</div>
       <div class="tlhi" data-en="Brand identities, catalogues &amp; company profiles" data-id="Identitas brand, katalog, &amp; profil perusahaan">Brand identities, catalogues &amp; company profiles</div>
     </div>
     
     <div class="tlitem">
       <div class="tldate" data-en="Jul 2023 — Sep 2023" data-id="Juli 2023 — September 2023">Jul 2023 — Sep 2023</div>
-      <div class="tlrole" data-en="Communications Intern" data-id="Mahasiswa Magang Komunikasi">Communications Intern</div><div class="tlco">Diskominfo Cianjur</div><br>
+      <div class="tlrole" data-en="Communications Intern" data-id="Mahasiswa Magang Komunikasi">Communications Intern</div>
+      <div class="tlco">Diskominfo Cianjur</div>
+      <div class="tlloc">LOC: Cianjur, Indonesia</div>
       <div class="tlhi" data-en="200+ content assets analyzed &amp; evaluated" data-id="200+ aset konten dianalisis &amp; dievaluasi">200+ content assets analyzed &amp; evaluated</div>
     </div>
     
@@ -605,7 +650,7 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
   <div class="cinner">
     <div class="rv">
       <h2 class="chline" data-en="LET'S WORK <em>TOGETHER</em>" data-id="MARI <em>BERKOLABORASI</em>">LET'S WORK <em>TOGETHER</em></h2>
-      <p class="csub" data-en="Interested in collaborating? Reach me through any channel below." data-id="Tertarik berkolaborasi? Hubungi saya melalui salah satu kanal di bawah ini.">Tertarik berkolaborasi? Hubungi saya melalui salah satu kanal di bawah ini.</p>
+      <p class="csub" data-en="Interested in collaborating? Reach me through any channel below." data-id="Tertarik berkolaborasi? Hubungi saya melalui salah satu kanal di bawah ini.">Interested in collaborating? Reach me through any channel below.</p>
       <div class="fbox">
         <div class="fttl" data-en="SEND MESSAGE" data-id="KIRIM PESAN">SEND MESSAGE</div>
         <div class="frow">
@@ -634,6 +679,48 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
 <button id="btt" onclick="window.scrollTo(0,0)">↑ TOP</button>
 
 <script>
+// Logic Splash Screen
+document.addEventListener('DOMContentLoaded', () => {
+  const splash = document.getElementById('splash');
+  const counter = document.getElementById('s-counter');
+  let count = 0;
+
+  let interval = setInterval(() => {
+    count += Math.floor(Math.random() * 20) + 10; 
+    if (count >= 100) {
+      count = 100;
+      counter.innerText = count + '%';
+      clearInterval(interval);
+      setTimeout(() => {
+        splash.classList.add('splash-hide');
+        setTimeout(() => splash.remove(), 600);
+      }, 200); 
+    } else {
+      counter.innerText = count + '%';
+    }
+  }, 60);
+});
+
+// Project Filtering System
+const filterBtns = document.querySelectorAll('.filter-btn');
+const workRows = document.querySelectorAll('.wrow');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const filterValue = btn.dataset.filter;
+    workRows.forEach(row => {
+      if(filterValue === 'all' || row.dataset.category.includes(filterValue)) {
+        row.style.display = 'grid';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+
 // Live System Clock
 setInterval(function(){
   var d=new Date();
@@ -654,12 +741,12 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cd.s
 (function animR(){rx+=(mx-rx)*.3;ry+=(my-ry)*.3;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(animR);})();
 
 // Hover Effects for Custom Cursor
-document.querySelectorAll('a, button, .wrow, .mitem, .atag, .stat-box, .live-badge').forEach(el => {
+document.querySelectorAll('a, button, .wrow, .mitem, .atag, .stat-box, .live-badge, .filter-btn').forEach(el => {
   el.addEventListener('mouseenter', () => { cr.style.transform = 'translate(-50%,-50%) scale(1.5)'; cr.style.background = '#FF3B30'; });
   el.addEventListener('mouseleave', () => { cr.style.transform = 'translate(-50%,-50%) scale(1)'; cr.style.background = 'var(--gold)'; });
 });
 
-// Scroll reveal (Faster, snappy for brutalism)
+// Scroll reveal
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('on');},i*40);});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
 
@@ -681,7 +768,6 @@ window.addEventListener('load',function(){
   function ang(i){return Math.PI*2*i/N-Math.PI/2;}
   function pt(i,v){var r=(v/100)*R;return{x:cx+r*Math.cos(ang(i)),y:cy+r*Math.sin(ang(i))};}
   
-  // Brutalist Grid
   [20,40,60,80,100].forEach(function(p){
     var r=(p/100)*R;
     ctx.beginPath();
@@ -689,26 +775,22 @@ window.addEventListener('load',function(){
     ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.stroke();
   });
   
-  // axes
   for(var i=0;i<N;i++){var p=pt(i,100);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(p.x,p.y);ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();}
   
-  // fill
   ctx.beginPath();
   skills.forEach(function(s,i){var p=pt(i,s.v);i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);});
   ctx.closePath();
-  ctx.fillStyle='#FF3B30'; // Solid Red fill
+  ctx.fillStyle='#FF3B30';
   ctx.fill();
   ctx.strokeStyle='#000';ctx.lineWidth=3;ctx.stroke();
   
-  // dots
   skills.forEach(function(s,i){
     var p=pt(i,s.v);
-    ctx.beginPath();ctx.rect(p.x-5,p.y-5,10,10); // Square dots
+    ctx.beginPath();ctx.rect(p.x-5,p.y-5,10,10);
     ctx.fillStyle='#FFD500';ctx.fill();
     ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();
   });
   
-  // labels
   skills.forEach(function(s,i){
     var lr=R+40,lx=cx+lr*Math.cos(ang(i)),ly=cy+lr*Math.sin(ang(i));
     var lines=s.l.split('\n');
@@ -722,6 +804,8 @@ var lang='en';
 function toggleLang(){
   lang=lang==='en'?'id':'en';
   document.querySelectorAll('[data-en]').forEach(function(el){var t=lang==='en'?el.dataset.en:el.dataset.id;if(t)el.innerHTML=t;});
+  const st = document.querySelector('.s-text');
+  if(st) { st.innerText = lang === 'en' ? st.dataset.en : st.dataset.id; }
 }
 
 // Send mail
