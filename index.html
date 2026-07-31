@@ -127,7 +127,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .warr{text-decoration:none;color:var(--txt);font-size:24px;font-weight:700;transition:.2s; background:#fff; border:2px solid var(--border); width:40px; height:40px; display:flex; align-items:center; justify-content:center;}
 .wrow:hover .warr{background:var(--red); color:#fff;}
 
-/* GRID 2x2 WITH OS WINDOW & GRAYSCALE HOVER */
+/* GRID 2x2 WITH OS WINDOW & GRAYSCALE HOVER - ANTI CACLOK FIX */
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1000px;margin:0 auto; align-items: start;}
 .mitem{border:var(--bw) solid var(--border); box-shadow: 8px 8px 0px var(--border); background:#fff; display:flex; flex-direction:column; transition: transform 0.15s, box-shadow 0.15s;}
 .mitem:hover{transform: translate(4px,4px); box-shadow: 4px 4px 0px var(--border);}
@@ -146,8 +146,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 
 /* Image Wrapper Fix - Tampil Utuh Tanpa Kepotong */
 .mimg-wrap {
-  width:100%;
-  overflow:hidden; background:#000; border-bottom:var(--bw) solid var(--border);
+  width:100%; overflow:hidden; background:#000; border-bottom:var(--bw) solid var(--border);
 }
 .mimg-wrap img {
   width:100%; height:auto; display:block;
@@ -187,6 +186,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{font-family:'Space Grotesk',sans-serif; font-size:11px;font-weight:700;border:2px solid var(--border);background:var(--gold);padding:6px 12px; text-transform:uppercase; box-shadow: 2px 2px 0px var(--border); transition:0.1s;}
 .tag:hover {transform:rotate(-3deg) scale(1.1); background:var(--blue); color:#fff;}
+
+/* ARSENAL & TECH STACK STYLES */
+.arsenal-box {
+  background: #fff; border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border); padding: 24px; margin-top: 32px;
+}
+.atags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.atag {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
+  border: 2px solid var(--border); background: var(--bg); padding: 6px 12px;
+  text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+}
+.atag:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0px var(--border); }
+.atag:nth-child(4n+1):hover { background: var(--gold); color:var(--txt); }
+.atag:nth-child(4n+2):hover { background: var(--green); color:var(--txt); }
+.atag:nth-child(4n+3):hover { background: var(--blue); color:#fff; }
+.atag:nth-child(4n):hover { background: var(--red); color:#fff; }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.spin-gear { display: inline-block; animation: spin 4s linear infinite; font-size: 20px; }
 
 /* TIMELINE */
 .tlitem{padding-bottom:32px;border-left:5px solid var(--border);padding-left:24px;position:relative}
@@ -433,11 +451,42 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="sbar"><div class="sbh"><span class="sbn">Social Media Strategy</span><span class="sbp">65%</span></div><div class="sbt"><div class="sbf" data-pct="65"></div></div></div>
     </div>
     <br>
+    
+    <!-- COMPETENCIES & SOFT SKILLS -->
     <div class="slbl">COMPETENCIES</div>
     <div class="tgrp"><div class="tglbl">Design</div><div class="tags"><span class="tag">Graphic Design</span><span class="tag">Visual Branding</span><span class="tag">Thumbnail Design</span></div></div>
     <div class="tgrp"><div class="tglbl">Operations &amp; Admin</div><div class="tags"><span class="tag">Database Mgt.</span><span class="tag">Workflow Automation</span><span class="tag">System Administration</span></div></div>
     <div class="tgrp"><div class="tglbl">Data &amp; Analytics</div><div class="tags"><span class="tag">Data Visualization</span><span class="tag">Excel</span><span class="tag">Business Analytics</span></div></div>
     <div class="tgrp"><div class="tglbl">Soft Skills</div><div class="tags"><span class="tag">Strategic Comm.</span><span class="tag">Adaptive Leadership</span><span class="tag">Project Management</span></div></div>
+
+    <!-- TECH STACK & ARSENAL BOX -->
+    <div class="arsenal-box rv">
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; border-bottom: 3px solid var(--border); padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <span data-en="TECH STACK & ARSENAL" data-id="ALAT TEMPUR & TEKNOLOGI">TECH STACK & ARSENAL</span>
+        <span class="spin-gear">⚙</span>
+      </div>
+      
+      <div class="atags">
+        <span class="atag">Canva</span>
+        <span class="atag">CapCut</span>
+        <span class="atag">Adobe Illustrator</span>
+        <span class="atag">Affinity Designer</span>
+        <span class="atag">MS Word & Excel</span>
+        <span class="atag">Google Workspace</span>
+        <span class="atag">Looker Studio</span>
+        <span class="atag">WordPress</span>
+        <span class="atag">GitHub & Vercel</span>
+      </div>
+
+      <div style="border-top: 2px dashed var(--border); padding-top: 16px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--txt); margin-bottom: 8px; letter-spacing: 0.1em; text-transform: uppercase;" data-en="HARDWARE DEPLOYMENT" data-id="PERANGKAT KERAS">Hardware Deployment</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; display:flex; flex-direction: column; gap:6px;">
+          <div><span style="color:var(--red);">[+]</span> Acer Workstation</div>
+          <div><span style="color:var(--blue);">[+]</span> Google Pixel 6 Pro</div>
+        </div>
+      </div>
+    </div>
+    
   </div>
   
   <div class="rv">
@@ -478,12 +527,6 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="tlhi" data-en="200+ content assets analyzed &amp; evaluated" data-id="200+ aset konten dianalisis &amp; dievaluasi">200+ content assets analyzed &amp; evaluated</div>
     </div>
     
-    <div class="tlitem">
-      <div class="tldate" data-en="Aug 2021 — Aug 2025" data-id="Agustus 2021 — Agustus 2025">Aug 2021 — Aug 2025</div>
-      <div class="tlrole" data-en="B.A. in Communication Science" data-id="S1 Ilmu Komunikasi">B.A. in Communication Science</div><div class="tlco">Universitas Putra Indonesia</div><br>
-      <div class="tlhi" data-en="GPA: 3.69 / 4.00 · Cum Laude" data-id="IPK: 3.69 / 4.00 · Cum Laude">GPA: 3.69 / 4.00 · Cum Laude</div>
-    </div>
-    <!-- ORGANIZATIONS -->
     <div class="slbl" data-en="ORGANIZATION EXPERIENCE" data-id="PENGALAMAN ORGANISASI" style="margin-top: 32px;">ORGANIZATION EXPERIENCE</div>
     
     <div class="tlitem">
@@ -503,6 +546,15 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="tlrole" data-en="Presidium I & Secretary" data-id="Presidium I RAT & Sekretaris">Presidium I & Secretary</div><div class="tlco">Himpunan Mahasiswa Islam (HMI)</div><br>
       <div class="tlhi" data-en="Presided annual meetings & managed organizational administration" data-id="Memimpin persidangan RAT & mengelola administrasi organisasi">Presided annual meetings & managed organizational administration</div>
     </div>
+    
+    <div class="slbl" data-en="EDUCATION" data-id="PENDIDIKAN" style="margin-top: 32px;">EDUCATION</div>
+    
+    <div class="tlitem">
+      <div class="tldate" data-en="Aug 2021 — Aug 2025" data-id="Agustus 2021 — Agustus 2025">Aug 2021 — Aug 2025</div>
+      <div class="tlrole" data-en="B.A. in Communication Science" data-id="S1 Ilmu Komunikasi">B.A. in Communication Science</div><div class="tlco">Universitas Putra Indonesia</div><br>
+      <div class="tlhi" data-en="GPA: 3.69 / 4.00 · Cum Laude" data-id="IPK: 3.69 / 4.00 · Cum Laude">GPA: 3.69 / 4.00 · Cum Laude</div>
+    </div>
+    
   </div>
 </section>
 
@@ -568,7 +620,7 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cd.s
 (function animR(){rx+=(mx-rx)*.3;ry+=(my-ry)*.3;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(animR);})();
 
 // Hover Effects for Custom Cursor
-document.querySelectorAll('a, button, .wrow, .mitem').forEach(el => {
+document.querySelectorAll('a, button, .wrow, .mitem, .atag').forEach(el => {
   el.addEventListener('mouseenter', () => { cr.style.transform = 'translate(-50%,-50%) scale(1.5)'; cr.style.background = '#FF3B30'; });
   el.addEventListener('mouseleave', () => { cr.style.transform = 'translate(-50%,-50%) scale(1)'; cr.style.background = 'var(--gold)'; });
 });
