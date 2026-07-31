@@ -214,13 +214,13 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
 
 /* MOBILE */
 @media(max-width:768px){
-  nav{padding:16px 20px}
+  nav { padding: 16px 15px; }
+  .nlogo { font-size: 14px; padding: 4px 6px; }
+  .nlinks { gap: 10px; } /* Jarak antar menu dipersempit biar muat */
+  .nlinks a { font-size: 10px; display: block; } /* Memunculkan kembali menu teks */
+  .lbtn { padding: 4px 8px; font-size: 9px; letter-spacing: 0; }
   
-  /* TAMBAHAN UNTUK MEMPERKECIL TOMBOL EN/ID DI HP */
-  .nlinks a { font-size: 11px; display: none; } /* Menyembunyikan link teks agar tombol EN/ID muat */
-  .lbtn { padding: 6px 10px; font-size: 10px; }
-  
-  #hero{grid-template-columns:1fr;padding-top:68px}
+  #hero{grid-template-columns:1fr;padding-top:80px}
   .hleft{padding:40px 20px; border-right:none; border-bottom:var(--bw) solid var(--border);}
   .hright{padding:20px;}
   .pwrap{height:400px;}
