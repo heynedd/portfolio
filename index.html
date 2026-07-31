@@ -36,7 +36,7 @@ body{
 }
 
 /* Tipografi Heading Brutal */
-h1, h2, h3, .nlogo, .nlinks a, .lbtn, .apill, .hsub, .bp, .bs, .wtag, .mlbl, .slbl, .sbn, .tglbl, .tldate, .tlco, .ciss, .fttl, .fbtn, .chtitle, .ffix, .botwname, .botwtitle, .wnum, .wtitle, .os-title, #btt {
+h1, h2, h3, .nlogo, .nlinks a, .lbtn, .apill, .hsub, .bp, .bs, .wtag, .mlbl, .slbl, .sbn, .tglbl, .tldate, .tlco, .ciss, .fttl, .fbtn, .chtitle, .ffix, .botwname, .botwtitle, .wnum, .wtitle, .os-title, #btt, .live-badge {
   font-family:'Space Grotesk',sans-serif;
   text-transform: uppercase;
 }
@@ -75,21 +75,56 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .apill{display:inline-flex;align-items:center;gap:8px;border:var(--bw) solid var(--border);background:#fff;padding:7px 18px;margin-bottom:26px;font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--txt);width:fit-content; box-shadow: 4px 4px 0px var(--border);}
 .adot{width:10px;height:10px;background:var(--green);border:2px solid var(--border);animation:bl 1.5s steps(2, end) infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
+
+/* HNAME & TYPOGRAPHY EFFECTS (LURUS & RAPI) */
 .hname{font-size:clamp(46px,7vw,100px);line-height:.95;margin-bottom:24px; font-weight:700; letter-spacing:-2px;}
-.nl{display:block;}
-.ni{color:var(--bg); text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 4px 4px 0px var(--red); display:block; margin-left: 20px;}
-.nb{display:block;}
-.hsub{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:20px; background:var(--gold); padding:5px 10px; width:fit-content; border:var(--bw) solid var(--border);}
-.hbio{font-size:16px;line-height:1.6;color:var(--txt);max-width:450px;margin-bottom:34px; font-weight:500; background:rgba(255,255,255,0.7); padding:10px; border:2px solid var(--border);}
+.nl, .nb { display:block; transition: all 0.15s ease; }
+.nl:hover { transform: translate(-3px, -3px); text-shadow: 5px 5px 0px var(--blue); }
+.nb:hover { transform: translate(-3px, -3px); text-shadow: 5px 5px 0px var(--green); }
+.nb::after { content: '_'; color: var(--red); animation: blink 1s step-end infinite; margin-left: 8px; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.ni { display:block; margin-left: 20px; color: transparent; -webkit-text-stroke: 2px var(--red); transition: all 0.15s ease; cursor: none; }
+.ni:hover { color: var(--red); -webkit-text-stroke: 2px var(--border); transform: translate(-4px, -4px); text-shadow: 6px 6px 0px var(--border); }
+
+/* BADGE KUNING */
+.hsub{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--txt);margin-bottom:20px; background:var(--gold); padding:5px 10px; width:fit-content; border:var(--bw) solid var(--border); transition: all 0.15s ease;}
+.hsub:hover { transform: rotate(-3deg) scale(1.05); background: var(--blue); color: #fff; }
+
+/* BIO LURUS & KOKOH */
+.hbio {
+  font-size: 16px; line-height: 1.6; color: var(--txt); width: 100%; max-width: 520px; margin-bottom: 34px; font-weight: 500;
+  background: #fff; padding: 20px 24px; border: var(--bw) solid var(--border);
+  box-shadow: 6px 6px 0px var(--border);
+}
 .ctas{display:flex;gap:16px;margin-bottom:42px;flex-wrap:wrap}
 .bp, .bs {background:var(--red);color:#fff;padding:16px 32px;font-size:13px;font-weight:700;letter-spacing:.1em;text-decoration:none;cursor:none;border:var(--bw) solid var(--border); box-shadow: 5px 5px 0px var(--border); transition: transform 0.1s, box-shadow 0.1s;}
 .bs {background:#fff; color:var(--txt);}
 .bp:hover, .bs:hover {transform:translate(3px,3px); box-shadow: 2px 2px 0px var(--border);}
 
-.hstats{display:flex;gap:34px; background:#fff; width:fit-content; padding:16px; border:var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border);}
-.stn{font-size:36px;font-weight:700;color:var(--txt);line-height:1; -webkit-text-stroke: 1px var(--border);}
-.stl{font-size:10px;font-weight:700;letter-spacing:.1em;margin-top:5px; border-top:2px solid var(--border); padding-top:4px;}
+/* STATS & LIVE BADGE CONTAINER */
+.hstats-wrapper {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; max-width: 520px;
+}
+.hstats { display: flex; gap: 12px; }
+.stat-box { background: #fff; border: var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border); padding: 10px 16px; transition: 0.15s; cursor: none; text-align: center; }
+.stat-box:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0px var(--red); background: var(--gold); }
+.stn { font-size: 30px; font-weight: 700; line-height: 1; -webkit-text-stroke: 1px var(--border); }
+.stl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; margin-top: 4px; border-top: 2px solid var(--border); padding-top: 2px; }
 
+/* LIVE STATUS BADGE DENGAN ANIMASI KEDIP */
+.live-badge {
+  background: var(--gold); border: var(--bw) solid var(--border); box-shadow: 4px 4px 0px var(--border);
+  padding: 14px 16px; font-size: 11px; font-weight: 700; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; flex-grow: 1;
+}
+.live-badge span { 
+  font-size: 9px; letter-spacing: 0.05em; background: #fff; border: 2px solid var(--border); padding: 1px 6px; 
+  animation: badgeBlink 1.2s steps(2, end) infinite;
+}
+@keyframes badgeBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 /* HERO PHOTO */
 .hright{position:relative;display:flex;align-items:center;justify-content:center;padding:40px; background:var(--blue);}
 .pwrap{position:relative;width:100%;height:82vh;max-height:660px; border:var(--bw) solid var(--border); box-shadow: 12px 12px 0px var(--border); background:#fff; overflow:hidden;}
@@ -132,11 +167,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mitem{border:var(--bw) solid var(--border); box-shadow: 8px 8px 0px var(--border); background:#fff; display:flex; flex-direction:column; transition: transform 0.15s, box-shadow 0.15s;}
 .mitem:hover{transform: translate(4px,4px); box-shadow: 4px 4px 0px var(--border);}
 
-/* OS Window Bar */
-.os-bar {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:8px 12px; border-bottom:var(--bw) solid var(--border); background:var(--bg);
-}
+.os-bar { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:var(--bw) solid var(--border); background:var(--bg); }
 .os-dots {display:flex; gap:6px;}
 .os-dot {width:12px; height:12px; border:2px solid var(--border); border-radius:50%;}
 .os-dot.r {background:var(--red);}
@@ -144,19 +175,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .os-dot.g {background:var(--green);}
 .os-title {font-size:10px; font-weight:700; letter-spacing:0.05em; color:var(--txt);}
 
-/* Image Wrapper Fix - Tampil Utuh Tanpa Kepotong */
-.mimg-wrap {
-  width:100%; overflow:hidden; background:#000; border-bottom:var(--bw) solid var(--border);
-}
-.mimg-wrap img {
-  width:100%; height:auto; display:block;
-  filter: grayscale(100%) contrast(110%);
-  transition: filter 0.2s ease, transform 0.3s ease;
-}
-.mitem:hover .mimg-wrap img {
-  filter: grayscale(0%) contrast(100%);
-  transform: scale(1.05); /* Sedikit zoom interaktif */
-}
+.mimg-wrap { width:100%; overflow:hidden; background:#000; border-bottom:var(--bw) solid var(--border); }
+.mimg-wrap img { width:100%; height:auto; display:block; filter: grayscale(100%) contrast(110%); transition: filter 0.2s ease, transform 0.3s ease; }
+.mitem:hover .mimg-wrap img { filter: grayscale(0%) contrast(100%); transform: scale(1.05); }
 .mlbl{padding:16px;font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--txt); background:#fff;}
 
 /* ABOUT */
@@ -188,21 +209,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .tag:hover {transform:rotate(-3deg) scale(1.1); background:var(--blue); color:#fff;}
 
 /* ARSENAL & TECH STACK STYLES */
-.arsenal-box {
-  background: #fff; border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border); padding: 24px; margin-top: 32px;
-}
+.arsenal-box { background: #fff; border: var(--bw) solid var(--border); box-shadow: 6px 6px 0px var(--border); padding: 24px; margin-top: 32px; }
 .atags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-.atag {
-  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
-  border: 2px solid var(--border); background: var(--bg); padding: 6px 12px;
-  text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
-}
+.atag { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; border: 2px solid var(--border); background: var(--bg); padding: 6px 12px; text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s, background 0.1s; }
 .atag:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0px var(--border); }
 .atag:nth-child(4n+1):hover { background: var(--gold); color:var(--txt); }
 .atag:nth-child(4n+2):hover { background: var(--green); color:var(--txt); }
 .atag:nth-child(4n+3):hover { background: var(--blue); color:#fff; }
 .atag:nth-child(4n):hover { background: var(--red); color:#fff; }
-
 @keyframes spin { 100% { transform: rotate(360deg); } }
 .spin-gear { display: inline-block; animation: spin 4s linear infinite; font-size: 20px; }
 
@@ -325,16 +339,36 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <span class="nb">Mulyana</span>
     </h1>
     <p class="hsub" data-en="Communication • Design • Data" data-id="Komunikasi • Desain • Data">Communication • Design • Data</p>
+    
     <p class="hbio" data-en="Creative Strategist &amp; Data Analyst based in Cianjur, Indonesia. Disrupting conventional boundaries by bridging compelling narrative, visual branding, and data-driven insights." data-id="Creative Strategist &amp; Data Analyst berbasis di Cianjur, Indonesia. Mendobrak batasan konvensional dengan menjembatani narasi, branding visual, dan wawasan berbasis data.">Creative Strategist &amp; Data Analyst based in Cianjur, Indonesia. Disrupting conventional boundaries by bridging compelling narrative, visual branding, and data-driven insights.</p>
+    
     <div class="ctas">
       <a href="#work" class="bp" data-en="View Work" data-id="Lihat Karya">View Work</a>
       <a href="https://drive.google.com/drive/folders/1UdDvC6CPPHDwFdqBIIVD07SVYxRn1R6h?usp=drive_link" target="_blank" class="bs" data-en="Full Portfolio" data-id="Portofolio Lengkap">Full Portfolio</a>
     </div>
-    <div class="hstats">
-      <div><div class="stn">1M+</div><div class="stl" data-en="YouTube Views" data-id="Views YouTube">YouTube Views</div></div>
-      <div><div class="stn">3.69</div><div class="stl" data-en="GPA / 4.00" data-id="IPK / 4.00">GPA / 4.00</div></div>
-      <div><div class="stn">5+</div><div class="stl" data-en="Projects" data-id="Proyek">Projects</div></div>
+    
+    <!-- STATS DAN LIVE BADGE DIBAWAHNYA DIBUAT LURUS DAN SEJAJAR -->
+    <div class="hstats-wrapper">
+      <div class="hstats">
+        <div class="stat-box">
+          <div class="stn">1M+</div>
+          <div class="stl" data-en="Views" data-id="Views">Views</div>
+        </div>
+        <div class="stat-box">
+          <div class="stn">3.69</div>
+          <div class="stl" data-en="GPA" data-id="IPK">GPA</div>
+        </div>
+        <div class="stat-box">
+          <div class="stn">5+</div>
+          <div class="stl" data-en="Projects" data-id="Proyek">Projects</div>
+        </div>
+      </div>
+      <div class="live-badge">
+        <span data-en="STATUS" data-id="STATUS">STATUS</span>
+        <span style="color:var(--green); background:#000; padding:2px 8px; border:none;" data-en="READY TO DEPLOY" data-id="SIAP KERJA">READY TO DEPLOY</span>
+      </div>
     </div>
+
   </div>
   <div class="hright rv">
     <div class="pwrap">
@@ -505,8 +539,8 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
     
     <div class="tlitem">
       <div class="tldate" data-en="Dec 2025 — Feb 2026" data-id="Desember 2025 — Februari 2026">Dec 2025 — Feb 2026</div>
-      <div class="tlrole" data-en="Content &amp; Operations Lead" data-id="Pimpinan Konten &amp; Operasional">Content &amp; Operations Lead</div><div class="tlco">Ratu Mimis</div><br>
-      <div class="tlhi" data-en="1,017,208 YouTube views · +340% channel growth" data-id="1.017.208 views YouTube · Naik 340%">1,017,208 YouTube views · +340% channel growth</div>
+      <div class="tlrole" data-en="Content &amp; Operations Lead" data-id="Pimpinan Konten &amp; Operasional">Content &amp; Operations Lead</div><div class="tlco">RS3 Workshop</div><br>
+      <div class="tlhi" data-en="1,017,208 YouTube views · Developed WhatsApp automation & Looker Studio dashboard" data-id="1.017.208 views YouTube · Mengembangkan otomasi WhatsApp & dashboard analitik Looker Studio">1,017,208 YouTube views · Developed WhatsApp automation & Looker Studio dashboard</div>
     </div>
     
     <div class="tlitem">
@@ -620,7 +654,7 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cd.s
 (function animR(){rx+=(mx-rx)*.3;ry+=(my-ry)*.3;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(animR);})();
 
 // Hover Effects for Custom Cursor
-document.querySelectorAll('a, button, .wrow, .mitem, .atag').forEach(el => {
+document.querySelectorAll('a, button, .wrow, .mitem, .atag, .stat-box, .live-badge').forEach(el => {
   el.addEventListener('mouseenter', () => { cr.style.transform = 'translate(-50%,-50%) scale(1.5)'; cr.style.background = '#FF3B30'; });
   el.addEventListener('mouseleave', () => { cr.style.transform = 'translate(-50%,-50%) scale(1)'; cr.style.background = 'var(--gold)'; });
 });
