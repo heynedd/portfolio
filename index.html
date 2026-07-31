@@ -215,6 +215,11 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
 /* MOBILE */
 @media(max-width:768px){
   nav{padding:16px 20px}
+  
+  /* TAMBAHAN UNTUK MEMPERKECIL TOMBOL EN/ID DI HP */
+  .nlinks a { font-size: 11px; display: none; } /* Menyembunyikan link teks agar tombol EN/ID muat */
+  .lbtn { padding: 6px 10px; font-size: 10px; }
+  
   #hero{grid-template-columns:1fr;padding-top:68px}
   .hleft{padding:40px 20px; border-right:none; border-bottom:var(--bw) solid var(--border);}
   .hright{padding:20px;}
@@ -426,7 +431,7 @@ if(sb)bobs.observe(sb);
 window.addEventListener('load',function(){
   var c=document.getElementById('radarCanvas');
   if(!c)return;
-  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2,R=Math.min(W,H)*.36;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2,R=Math.min(W,H)*.28;
   var skills=[
     {l:'Visual\nBranding',v:75},{l:'Strategic\nComm.',v:72},{l:'Database\nAdmin',v:70},
     {l:'Workflow\nTracking',v:68},{l:'Data\nAnalytics',v:70},{l:'Social\nMedia',v:65}
@@ -465,7 +470,7 @@ window.addEventListener('load',function(){
   
   // labels
   skills.forEach(function(s,i){
-    var lr=R+45,lx=cx+lr*Math.cos(ang(i)),ly=cy+lr*Math.sin(ang(i));
+    var lr=R+40,lx=cx+lr*Math.cos(ang(i)),ly=cy+lr*Math.sin(ang(i));
     var lines=s.l.split('\n');
     ctx.fillStyle='#000';ctx.font='700 10px Space Grotesk,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
     lines.forEach(function(ln,j){ctx.fillText(ln.toUpperCase(),lx,ly+(j-(lines.length-1)/2)*12);});
