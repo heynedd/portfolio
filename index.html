@@ -144,13 +144,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .os-dot.g {background:var(--green);}
 .os-title {font-size:10px; font-weight:700; letter-spacing:0.05em; color:var(--txt);}
 
-/* Image Wrapper with Aspect Ratio Lock */
+/* Image Wrapper Fix - Tampil Utuh Tanpa Kepotong */
 .mimg-wrap {
-  width:100%; aspect-ratio: 4/3; /* Mencegah Caclok, rasio selalu konsisten */
+  width:100%;
   overflow:hidden; background:#000; border-bottom:var(--bw) solid var(--border);
 }
 .mimg-wrap img {
-  width:100%; height:100%; object-fit:cover; display:block;
+  width:100%; height:auto; display:block;
   filter: grayscale(100%) contrast(110%);
   transition: filter 0.2s ease, transform 0.3s ease;
 }
@@ -483,7 +483,26 @@ footer{padding:30px 48px;border-top:var(--bw) solid var(--border);background:var
       <div class="tlrole" data-en="B.A. in Communication Science" data-id="S1 Ilmu Komunikasi">B.A. in Communication Science</div><div class="tlco">Universitas Putra Indonesia</div><br>
       <div class="tlhi" data-en="GPA: 3.69 / 4.00 · Cum Laude" data-id="IPK: 3.69 / 4.00 · Cum Laude">GPA: 3.69 / 4.00 · Cum Laude</div>
     </div>
+    <!-- ORGANIZATIONS -->
+    <div class="slbl" data-en="ORGANIZATION EXPERIENCE" data-id="PENGALAMAN ORGANISASI" style="margin-top: 32px;">ORGANIZATION EXPERIENCE</div>
     
+    <div class="tlitem">
+      <div class="tldate" data-en="2023 — 2024" data-id="2023 — 2024">2023 — 2024</div>
+      <div class="tlrole" data-en="Vice President" data-id="Wakil Presiden">Vice President</div><div class="tlco">Ruang Sesar</div><br>
+      <div class="tlhi" data-en="Led coordination meetings & managed cross-division organizational programs" data-id="Memimpin rapat koordinasi & memastikan kelancaran program lintas divisi">Led coordination meetings & managed cross-division organizational programs</div>
+    </div>
+    
+    <div class="tlitem">
+      <div class="tldate" data-en="2022 — 2023" data-id="2022 — 2023">2022 — 2023</div>
+      <div class="tlrole" data-en="Information & Communication" data-id="Bidang Informasi & Komunikasi">Information & Communication</div><div class="tlco">Ruang Sesar</div><br>
+      <div class="tlhi" data-en="Managed social media & documented organizational publications" data-id="Mengelola media sosial & menyusun materi publikasi organisasi">Managed social media & documented organizational publications</div>
+    </div>
+    
+    <div class="tlitem">
+      <div class="tldate" data-en="2021 — 2025" data-id="2021 — 2025">2021 — 2025</div>
+      <div class="tlrole" data-en="Presidium I & Secretary" data-id="Presidium I RAT & Sekretaris">Presidium I & Secretary</div><div class="tlco">Himpunan Mahasiswa Islam (HMI)</div><br>
+      <div class="tlhi" data-en="Presided annual meetings & managed organizational administration" data-id="Memimpin persidangan RAT & mengelola administrasi organisasi">Presided annual meetings & managed organizational administration</div>
+    </div>
   </div>
 </section>
 
